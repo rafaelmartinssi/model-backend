@@ -12,7 +12,7 @@ alter table usuario auto_increment = 1;
 alter table grupo auto_increment = 1;
 alter table permissao auto_increment = 1;
 
-insert into permissao (id, nome, descricao) values (1, 'INCLUDE_USER', 'Permite cadastrar usuário');
+insert into permissao (id, nome, descricao) values (1, 'CREATE_USER', 'Permite cadastrar usuário');
 insert into permissao (id, nome, descricao) values (2, 'EDIT_USER', 'Permite editar usuário');
 
 insert into grupo (id, nome) values (1, 'Admin');

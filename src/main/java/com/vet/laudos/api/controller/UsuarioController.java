@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,7 @@ import com.vet.laudos.domain.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UsuarioController {
 
 	@Autowired
@@ -39,11 +42,13 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioDisassembler disassembler;
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping
 	public ResponseDefault<UsuarioOutput> listar(){
 		return new ResponseDefault<>(assembler.toCollectionModel(repository.findAll()));
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseDefault<UsuarioOutput>> buscar(@PathVariable("id") Long id) {
 		try {
@@ -59,6 +64,7 @@ public class UsuarioController {
 		}
 	}
 	
+	@PreAuthorize("hasAuthority('CREATE_USER')")
 	@PostMapping
 	public ResponseEntity<ResponseDefault<UsuarioOutput>> adicionar(@RequestBody UsuarioInput usuarioInput) {
 		try {
@@ -82,6 +88,7 @@ public class UsuarioController {
 		}	
 	}
 	
+	@PreAuthorize("hasAuthority('EDIT_USER')")
 	@PutMapping("/{id}")
 	public ResponseEntity<ResponseDefault<UsuarioOutput>> atualizar(@PathVariable Long id,
 			@RequestBody UsuarioInput usuarioInput){
