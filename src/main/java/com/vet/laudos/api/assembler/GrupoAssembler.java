@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.vet.laudos.api.dto.GrupoOutput;
+import com.vet.laudos.api.dto.output.GrupoOutput;
 import com.vet.laudos.domain.model.Grupo;
 
 @Component

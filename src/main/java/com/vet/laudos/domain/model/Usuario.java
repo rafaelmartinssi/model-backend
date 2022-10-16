@@ -1,12 +1,10 @@
 package com.vet.laudos.domain.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Usuario implements Serializable{
@@ -27,16 +23,8 @@ public class Usuario implements Serializable{
 	private Long id;
 	
 	private String nome;
-	private String sobrenome;
-	private String cpf;
-	private String celular;
-	private String nascimento;
 	private String email;
 	private String senha;
-	
-	@CreationTimestamp
-	@Column(nullable = false, columnDefinition = "datetime")
-	private LocalDateTime dataCadastro;
 	
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"),
@@ -53,14 +41,6 @@ public class Usuario implements Serializable{
 	
 	public boolean isNovo() {
 		return getId() == null;
-	}
-	
-	public LocalDateTime getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDateTime dataCadastro) {
-		this.dataCadastro = dataCadastro;
 	}
 
 	public Set<Grupo> getGrupos() {
@@ -83,12 +63,6 @@ public class Usuario implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -100,24 +74,6 @@ public class Usuario implements Serializable{
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	public String getNascimento() {
-		return nascimento;
-	}
-	public void setNascimento(String nascimento) {
-		this.nascimento = nascimento;
 	}
 	@Override
 	public int hashCode() {

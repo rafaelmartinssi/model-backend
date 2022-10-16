@@ -1,4 +1,4 @@
-package com.vet.laudos.api.dto;
+package com.vet.laudos.api.dto.input;
 
 import java.io.Serializable;
 

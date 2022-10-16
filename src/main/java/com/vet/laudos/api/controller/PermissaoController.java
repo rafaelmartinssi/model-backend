@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vet.laudos.api.assembler.PermissaoAssembler;
-import com.vet.laudos.api.dto.PermissaoOutput;
 import com.vet.laudos.api.dto.ResponseDefault;
+import com.vet.laudos.api.dto.output.PermissaoOutput;
 import com.vet.laudos.domain.repository.PermissaoRepository;
 
 @RestController

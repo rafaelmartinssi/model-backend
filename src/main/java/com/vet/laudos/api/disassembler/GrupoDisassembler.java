@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.vet.laudos.api.dto.GrupoInput;
+import com.vet.laudos.api.dto.input.GrupoInput;
 import com.vet.laudos.domain.model.Grupo;
 
 @Controller

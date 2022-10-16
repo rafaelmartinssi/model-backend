@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vet.laudos.api.assembler.GrupoAssembler;
 import com.vet.laudos.api.disassembler.GrupoDisassembler;
-import com.vet.laudos.api.dto.GrupoInput;
-import com.vet.laudos.api.dto.GrupoOutput;
 import com.vet.laudos.api.dto.ResponseDefault;
+import com.vet.laudos.api.dto.input.GrupoInput;
+import com.vet.laudos.api.dto.output.GrupoOutput;
 import com.vet.laudos.domain.exception.EntidadeEmUsoException;
 import com.vet.laudos.domain.exception.EntidadeNaoEncontradaException;
 import com.vet.laudos.domain.exception.NegocioException;

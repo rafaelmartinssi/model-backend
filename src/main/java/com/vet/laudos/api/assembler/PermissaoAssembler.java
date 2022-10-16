@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.vet.laudos.api.dto.PermissaoOutput;
+import com.vet.laudos.api.dto.output.PermissaoOutput;
 import com.vet.laudos.domain.model.Permissao;
 
 @Component
