@@ -33,8 +33,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.secret(passwordEncoder.encode(""))
 		.authorizedGrantTypes("authorization_code")
 		.scopes("all")
-		.redirectUris("http://localhost")
-		.autoApprove(true);
+		.redirectUris("http://localhost:9000/callback");
+		//.autoApprove(true);
 	}
 	
 	@Override
