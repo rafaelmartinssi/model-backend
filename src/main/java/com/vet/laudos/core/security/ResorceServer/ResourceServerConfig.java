@@ -36,6 +36,9 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 			    .csrf().disable()
 				.cors()
 			.and()
+				.logout()
+				.logoutSuccessUrl("http://localhost:9000/index")
+			.and()
 				.oauth2ResourceServer()
 				.jwt()
 				.jwtAuthenticationConverter(jwtAuthenticationConverter());
