@@ -21,6 +21,7 @@ import com.vet.laudos.api.disassembler.UsuarioDisassembler;
 import com.vet.laudos.api.dto.ResponseDefault;
 import com.vet.laudos.api.dto.input.UsuarioInput;
 import com.vet.laudos.api.dto.output.UsuarioOutput;
+import com.vet.laudos.core.security.SecurityUtils;
 import com.vet.laudos.domain.exception.EntidadeNaoEncontradaException;
 import com.vet.laudos.domain.exception.NegocioException;
 import com.vet.laudos.domain.model.Info;
@@ -41,6 +42,8 @@ public class UsuarioController {
 	private UsuarioAssembler assembler;
 	@Autowired
 	private UsuarioDisassembler disassembler;
+	@Autowired
+	private SecurityUtils utils;
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping
@@ -53,6 +56,22 @@ public class UsuarioController {
 	public ResponseEntity<ResponseDefault<UsuarioOutput>> buscar(@PathVariable("id") Long id) {
 		try {
 			Usuario usuario = service.buscar(id);
+			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(usuario)), HttpStatus.OK);
+		}catch (EntidadeNaoEncontradaException e) {
+			List<Info> infos = new ArrayList<>();
+			Info info = new Info();
+			info.setCodigo(1);
+			info.setDescricao(e.getMessage());
+			infos.add(info);
+			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+		}
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/autenticado")
+	public ResponseEntity<ResponseDefault<UsuarioOutput>> getUsuarioAutenticado() {
+		try {
+			Usuario usuario = service.buscar(utils.getUserId());
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(usuario)), HttpStatus.OK);
 		}catch (EntidadeNaoEncontradaException e) {
 			List<Info> infos = new ArrayList<>();
