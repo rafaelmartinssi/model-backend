@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vet.laudos.api.assembler.UsuarioAssembler;
 import com.vet.laudos.api.disassembler.UsuarioDisassembler;
 import com.vet.laudos.api.dto.ResponseDefault;
+import com.vet.laudos.api.dto.input.SenhaInput;
 import com.vet.laudos.api.dto.input.UsuarioInput;
 import com.vet.laudos.api.dto.output.UsuarioOutput;
 import com.vet.laudos.core.security.SecurityUtils;
@@ -126,4 +127,26 @@ public class UsuarioController {
 			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
 		}
 	}
+	
+	@PreAuthorize("isAuthenticated()")
+    @PutMapping("/{id}/senha")
+    public ResponseEntity<?> alterarSenha(@PathVariable Long id, @RequestBody SenhaInput senha) {
+		try {
+			service.alterarSenha(id, senha.getSenhaAtual(), senha.getNovaSenha());
+			
+			List<Info> infos = new ArrayList<>();
+			Info info = new Info();
+			info.setCodigo(0);
+			info.setDescricao("Operação realizada com sucesso");
+			infos.add(info);
+			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+		} catch (NegocioException e) {
+			List<Info> infos = new ArrayList<>();
+			Info info = new Info();
+			info.setCodigo(1);
+			info.setDescricao(e.getMessage());
+			infos.add(info);
+			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+		}
+    } 
 }

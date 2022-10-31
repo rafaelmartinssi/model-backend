@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vet.laudos.domain.exception.EntidadeNaoEncontradaException;
@@ -23,6 +24,8 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	@Autowired
 	private GrupoService grupoService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
@@ -36,6 +39,17 @@ public class UsuarioService {
 		
 		return repository.save(usuario);
 	}
+	
+    @Transactional
+    public void alterarSenha(Long id, String senhaAtual, String novaSenha) {
+        Usuario usuario = buscar(id);
+        
+        if (!passwordEncoder.matches(senhaAtual, usuario.getSenha())) {
+            throw new NegocioException("Senha atual informada não coincide com a senha do usuário.");
+        }
+        
+        usuario.setSenha(passwordEncoder.encode(novaSenha));
+    }
 	
 	@Transactional
 	public void desassociarGrupo(Long usuarioId, Long grupoId) {
