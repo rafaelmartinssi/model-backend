@@ -55,12 +55,10 @@ public class GrupoController {
 			Grupo grupo = service.buscar(id);
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(grupo)), HttpStatus.OK);
 		}catch (EntidadeNaoEncontradaException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}
 	}
 	
@@ -71,19 +69,15 @@ public class GrupoController {
 			grupo = service.salvar(grupo);
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(grupo)), HttpStatus.OK);
 		} catch (NegocioException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		} catch (Exception e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao("Não foi possível incluir este usuário");
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}	
 	}
 	
@@ -97,12 +91,10 @@ public class GrupoController {
 			
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(grupoAtual)), HttpStatus.OK);
 		}catch (Exception e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao("Não foi possível atualizar este usuário");
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}
 	}
 	
@@ -118,19 +110,15 @@ public class GrupoController {
 			infos.add(info);
 			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
 		} catch (EntidadeNaoEncontradaException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}catch (EntidadeEmUsoException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}	
 	}
 

@@ -1,8 +1,5 @@
 package com.vet.laudos.api.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,12 +56,10 @@ public class UsuarioController {
 			Usuario usuario = service.buscar(id);
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(usuario)), HttpStatus.OK);
 		}catch (EntidadeNaoEncontradaException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}
 	}
 	
@@ -75,12 +70,10 @@ public class UsuarioController {
 			Usuario usuario = service.buscar(utils.getUserId());
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(usuario)), HttpStatus.OK);
 		}catch (EntidadeNaoEncontradaException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}
 	}
 	
@@ -92,19 +85,15 @@ public class UsuarioController {
 			usuario = service.salvar(usuario);
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(usuario)), HttpStatus.OK);
 		} catch (NegocioException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		} catch (Exception e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao("Não foi possível incluir este usuário");
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}	
 	}
 	
@@ -119,12 +108,10 @@ public class UsuarioController {
 			
 			return new ResponseEntity<>(new ResponseDefault<>(assembler.toModel(usuarioAtual)), HttpStatus.OK);
 		}catch (Exception e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao("Não foi possível atualizar este usuário");
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}
 	}
 	
@@ -134,19 +121,15 @@ public class UsuarioController {
 		try {
 			service.alterarSenha(id, senha.getSenhaAtual(), senha.getNovaSenha());
 			
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(0);
 			info.setDescricao("Operação realizada com sucesso");
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		} catch (NegocioException e) {
-			List<Info> infos = new ArrayList<>();
 			Info info = new Info();
 			info.setCodigo(1);
 			info.setDescricao(e.getMessage());
-			infos.add(info);
-			return new ResponseEntity<>(new ResponseDefault<>(infos), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseDefault<>(info), HttpStatus.OK);
 		}
     } 
 }

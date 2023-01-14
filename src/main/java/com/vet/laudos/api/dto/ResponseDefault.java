@@ -1,8 +1,6 @@
 package com.vet.laudos.api.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.vet.laudos.domain.model.Info;
 
@@ -11,18 +9,17 @@ public class ResponseDefault <T extends Serializable> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Object content;
-	private List<Info> infos = new ArrayList<>();
+	private Info info = new Info();
 	
 	public ResponseDefault (Object content) {
 		this.content = content;
 		Info info = new Info();
 		info.setCodigo(0);
 		info.setDescricao("Operação realizada com sucesso");
-		infos.add(info);
 	}
 	
-	public ResponseDefault (List<Info> infos) {
-		this.infos = infos;
+	public ResponseDefault (Info info) {
+		this.info = info;
 	}
 
 	public Object getContent() {
@@ -33,12 +30,12 @@ public class ResponseDefault <T extends Serializable> implements Serializable{
 		this.content = content;
 	}
 
-	public List<Info> getInfos() {
-		return infos;
+	public Info getInfo() {
+		return info;
 	}
 
-	public void setInfos(List<Info> infos) {
-		this.infos = infos;
+	public void setInfos(Info info) {
+		this.info = info;
 	}
 
 }

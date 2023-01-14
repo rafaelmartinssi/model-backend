@@ -1,8 +1,6 @@
 package com.vet.laudos.api.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -17,7 +15,7 @@ public class ResponsePeageable <T extends Serializable> implements Serializable 
 	private long totalPages;
 	private long size;
 	private long page;
-	private List<Info> infos = new ArrayList<>();
+	private Info info = new Info();
 	
 	public ResponsePeageable (Page<T> page) {
 		this.totalElements = page.getTotalElements();
@@ -27,8 +25,8 @@ public class ResponsePeageable <T extends Serializable> implements Serializable 
 		this.content = page.getContent();
 	}
 	
-	public ResponsePeageable (List<Info> infos) {
-		this.infos = infos;
+	public ResponsePeageable (Info info) {
+		this.info = info;
 	}
 
 	public Object getContent() {
@@ -71,12 +69,12 @@ public class ResponsePeageable <T extends Serializable> implements Serializable 
 		this.page = page;
 	}
 
-	public List<Info> getInfos() {
-		return infos;
+	public Info getInfo() {
+		return info;
 	}
 
-	public void setInfos(List<Info> infos) {
-		this.infos = infos;
+	public void setInfo(Info info) {
+		this.info = info;
 	}
 
 }
